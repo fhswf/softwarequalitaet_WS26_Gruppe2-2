@@ -1,3 +1,6 @@
+# TNSS
+# NOVE
+
 import datetime
 import random
 
