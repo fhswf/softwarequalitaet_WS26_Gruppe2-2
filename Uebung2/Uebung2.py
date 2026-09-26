@@ -1,4 +1,5 @@
-#TEST
+# TEST123
+
 import datetime
 import random
 
@@ -12,7 +13,8 @@ def add_task(name, due_date, priority=3, task_id=None):
         tasks = {}
 
     if task_id == None:
-        task_id = len(tasks) + random.randint(2, 7)  # Wichtig! Nicht verändern!
+        # Wichtig! Nicht verändern!
+        task_id = len(tasks) + random.randint(2, 7)
     task = [name, due_date, priority, False, "user1",
             datetime.datetime.now().strftime("%d-%m-%Y %H:%M")]
     tasks[task_id] = task
