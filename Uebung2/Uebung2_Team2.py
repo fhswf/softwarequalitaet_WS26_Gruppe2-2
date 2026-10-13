@@ -1,6 +1,37 @@
 #RTRE
 #JYBS
 
+"""
+=======================
+Aufgabe 1:
+=======================
+Welche Funktionen erfüllt der Code?
+
+- Verwaltung einer Aufgabenliste (To-Do-Liste)
+- Aufgaben hinzufügen (add_task)
+- Aufgaben löschen (remove_task)
+- Aufgaben als erledigt markieren (mark_done)
+- Aufgaben anzeigen (show_tasks)
+- Durchschnitt der Aufgabenlänge berechnen (calculate_task_average)
+- Kommende Aufgaben ermitteln (upcoming_tasks)
+- Erledigte Aufgaben entfernen (cleanup)
+- Anzahl der vorhandenen Aufgaben zählen (get_task_count)
+- Argumente der Aufgabe: Name, Fälligkeitsdatum, Priorität, ID
+
+Auffälligkeiten, die das Verständnis des Codes erschweren:
+
+- Aufgaben werden als Liste gespeichert, sodass die Bedeutung der einzelnen
+  Indizes (z.B. task[0], task[1], task[2]) nicht direkt erkennbar ist.
+- Es fehlen Kommentare.
+- Vorhanden Kommentare (TODO, Wichtig) sind nicht weiter erläutert.
+- Der Aufbau eines Tasks ist nicht dokumentiert.
+- Die Vergabe der task_id ist nicht eindeutig (länge String+ Zufallszahl)-->kann zwei mal gleich sein. 
+- backup_tasks wird befüllt, später jedoch nicht mehr verwendet.
+- Mehrere Funktionen prüfen nicht, ob tasks den Wert None besitzt.
+- Die Datumswerte werden als Strings gespeichert, wodurch Vergleiche nicht sauber funktionieren.
+- Zuordnung der Tasks nicht einheitlich. mark_done arbeitet mit dem task namen. Dieser kann mehrfach auftauchen. 
+"""
+
 import datetime
 import random
 
