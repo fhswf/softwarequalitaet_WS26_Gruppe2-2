@@ -54,9 +54,9 @@ Negativ zu bewerten:
 - Unvollständige Logik & Redundanz: backup_tasks wird befüllt, aber an keiner Stelle im Skript ausgelesen oder wiederhergestellt.
 - Verletzung von Clean Code Principles: Globale Zustände, magische Werte.
 
-===============================================================================
+
 IDENTIFIZIERTE SCHWACHSTELLEN UND MÖGLICHE VERBESSERUNGEN:
-===============================================================================
+
 1. Initialisierung 'tasks = None': Auf 'tasks = {}' korrigieren.
 2. Singleton-Vergleich 'task_id == None': Durch PEP8 'task_id is None' ersetzen.
 3. Unnötige 'global'-Anweisungen: In remove_task, mark_done, show_tasks entfernen.
@@ -70,7 +70,26 @@ IDENTIFIZIERTE SCHWACHSTELLEN UND MÖGLICHE VERBESSERUNGEN:
 11. Falsche Sortierung in upcoming_tasks(): Nach Fälligkeitsdatum sortieren.
 12. Ineffizientes Zählen in get_task_count(): sum() durch len(tasks) ersetzen.
 13. Fehlende Dokumentation: Kommentare pflegen.
+
 ===============================================================================
+AUFGABE 4: Code-Qualitätsanalyse mit pylint
+===============================================================================
+
+************* Module Uebung2_Team1
+Uebung2_Team1.py:54:0: C0301: Line too long (129/100) (line-too-long)
+Uebung2_Team1.py:1:0: C0103: Module name "Uebung2_Team1" doesn't conform to snake_case naming style (invalid-name)
+Uebung2_Team1.py:105:4: W0603: Using the global statement (global-statement)
+
+-----------------------------------
+Your code has been rated at 9.64/10
+
+-------------------------------------------------------------------------------
+
+1. C301: Kommenztarzeile für Aufgabenlösung
+2. C103: Dateiname entspricht nicht snake_case, ist aber halt so vorgegeben
+3. W603: Verwendung der globalen Anweisung 
+
+
 """
 
 import datetime
