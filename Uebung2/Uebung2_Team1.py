@@ -77,10 +77,11 @@ import datetime
 import random
 
 
+# Globale Aufgaben-Datenstrukturen
 tasks = {}
 backup_tasks = {}
 
-
+# Konstanten für transparente Zugriffe auf Task-Listenfelder (Aufgabe 3 Improvement)
 TASK_NAME_IDX = 0
 TASK_DUE_DATE_IDX = 1
 TASK_PRIORITY_IDX = 2
@@ -90,7 +91,17 @@ TASK_CREATED_AT_IDX = 5
 
 
 def add_task(name, due_date, priority=3, task_id=None):
+    """Fügt eine neue Aufgabe zur Aufgabenverwaltung hinzu.
 
+    Args:
+        name (str): Name/Beschreibung der Aufgabe.
+        due_date (str): Fälligkeitsdatum im Format 'DD-MM-YYYY'.
+        priority (int, optional): Priorität der Aufgabe. Standardwert ist 3.
+        task_id (str|int, optional): Eindeutige ID der Aufgabe. Standardwert ist None.
+
+    Returns:
+        str|int: Die zugewiesene Task-ID.
+    """
     global tasks
     if tasks is None:
         tasks = {}
@@ -99,6 +110,7 @@ def add_task(name, due_date, priority=3, task_id=None):
         # Wichtig! Nicht verändern!
         task_id = len(tasks) + random.randint(2, 7)
 
+    # Erstellung des Task-Eintrags mit Metadaten (Status: False/Offen)
     now_str = datetime.datetime.now().strftime("%d-%m-%Y %H:%M")
     task = [name, due_date, priority, False, "user1", now_str]
 
@@ -108,7 +120,14 @@ def add_task(name, due_date, priority=3, task_id=None):
 
 
 def remove_task(task_id):
+    """Löscht eine Aufgabe anhand ihrer ID.
 
+    Args:
+        task_id (str|int): Die ID der zu löschenden Aufgabe.
+
+    Returns:
+        bool: True, wenn die Aufgabe gelöscht wurde, sonst False.
+    """
     if task_id in tasks:
         del tasks[task_id]
         if task_id in backup_tasks:
@@ -118,7 +137,14 @@ def remove_task(task_id):
 
 
 def mark_done(task_name):
+    """Markiert Aufgaben mit dem angegebenen Namen als erledigt.
 
+    Args:
+        task_name (str): Name der zu erledigenden Aufgabe.
+
+    Returns:
+        str: Statusmeldung ("Erledigt" oder "Nicht gefunden").
+    """
     found = False
     for task in tasks.values():
         if task[TASK_NAME_IDX] == task_name:
@@ -128,7 +154,7 @@ def mark_done(task_name):
 
 
 def show_tasks():
-
+    """Gibt alle registrierten Aufgaben formatiert auf der Konsole aus."""
     for task_id, task in tasks.items():
         status = "Erledigt" if task[TASK_IS_DONE_IDX] else "Offen"
         print(
@@ -138,7 +164,11 @@ def show_tasks():
 
 
 def process_tasks():
+    """Wählt zufällig eine Aufgabe aus und schaltet deren Status um.
 
+    Returns:
+        bool: True, wenn eine Aufgabe verarbeitet wurde, sonst False.
+    """
     if not tasks:
         return False
     rand_id = random.choice(list(tasks.keys()))
@@ -147,7 +177,11 @@ def process_tasks():
 
 
 def calculate_task_average():
+    """Berechnet die durchschnittliche Priorität aller Aufgaben.
 
+    Returns:
+        float: Durchschnittliche Priorität der Aufgaben.
+    """
     if not tasks:
         return 0.0
     total_priority = sum(task[TASK_PRIORITY_IDX] for task in tasks.values())
@@ -155,12 +189,16 @@ def calculate_task_average():
 
 
 def upcoming_tasks():
+    """Ermittelt alle ausstehenden (offenen) Aufgaben und sortiert sie nach Datum.
 
+    Returns:
+        list: Liste der offenen Aufgaben, sortiert nach Fälligkeitsdatum.
+    """
     today = datetime.datetime.now().date()
     upcoming = []
 
     for task in tasks.values():
-
+        # Nur offene Aufgaben berücksichtigen
         if task[TASK_IS_DONE_IDX]:
             continue
         try:
@@ -170,15 +208,16 @@ def upcoming_tasks():
             if task_date >= today:
                 upcoming.append((task_date, task))
         except ValueError:
-
+            # Bei fehlerhaftem Datumsformat Fallback auf String-Vergleich
             upcoming.append((today, task))
 
+    # Sortierung nach dem echten Fälligkeitsdatum
     upcoming.sort(key=lambda item: item[0])
     return [task for _, task in upcoming]
 
 
 def cleanup():
-
+    """Entfernt alle bereits erledigten Aufgaben aus dem aktiven Wörterbuch."""
     temp = {
         task_id: task
         for task_id, task in tasks.items()
@@ -191,10 +230,15 @@ def cleanup():
 
 
 def get_task_count():
+    """Gibt die Gesamtanzahl der aktuellen Aufgaben zurück.
 
+    Returns:
+        int: Anzahl der Aufgaben.
+    """
     return len(tasks) if tasks else 0
 
 
+# Beispielszenario / Ausführung der Funktionen
 if __name__ == "__main__":
     add_task("Projekt abschließen", "25-05-2025", 1, task_id="hello")
     add_task("Projekt abschließen", "25-05-2025", 1)
