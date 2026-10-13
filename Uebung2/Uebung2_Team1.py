@@ -1,6 +1,44 @@
 # TNSS
 # NOVE
 
+"""
+===============================================================================
+AUFGABE 1: Funktionsübersicht & schwer verständliche Stellen im Code
+===============================================================================
+
+Funktion des Codes:
+Der Code stellt ein einfaches Aufgabenverwaltungssystem (To-Do-Liste) bereit:
+- add_task: Erstellt neue Aufgaben mit Name, Fälligkeitsdatum, Priorität, Status,
+  Ersteller ("user1") und Zeitstempel.
+- remove_task: Löscht eine Aufgabe anhand ihrer ID.
+- mark_done: Sucht Aufgaben nach Namen und markiert diese als erledigt.
+- show_tasks: Gibt alle derzeit gespeicherten Aufgaben auf der Konsole aus.
+- process_tasks: Wählt zufällig eine Aufgabe aus und schaltet deren Status um.
+- calculate_task_average: Berechnet statistische Werte (z. B. durchschnittliche
+  Priorität oder ID-Mittelwert) der Aufgaben.
+- upcoming_tasks: Filtert und sortiert ausstehende Aufgaben nach Fälligkeit.
+- cleanup: Entfernt alle erledigten Aufgaben aus der Liste.
+- get_task_count: Gibt die Anzahl der aktuell verwalteten Aufgaben zurück.
+
+Stellen, die das Verständnis des Codes erschweren:
+1. Verwendung magischer Listen-Indizes:
+   Tasks werden als anonyme Listen [name, due_date, priority, is_done, user, created_at]
+   gespeichert. Der Zugriff über task[0], task[1], task[2], task[3] ist fehleranfällig
+   und schwer nachvollziehbar.
+2. Unvorhersehbare ID-Generierung:
+   task_id = len(tasks) + random.randint(2, 7) erzeugt zufällige und nicht-fortlaufende
+   Schlüssel, was zu Inkonsistenzen führen kann.
+3. Globale Variablen & Seiteneffekte:
+   Funktionen nutzen 'global tasks' und 'global backup_tasks' anstelle einer sauberen
+   Kapselung (z.B. in einer Klasse) oder Übergabe als Funktionsparameter.
+4. Fehlerhafte Datumsvergleiche:
+   In upcoming_tasks() werden Datumsangaben im Format "DD-MM-YYYY" als normale Strings
+   verglichen (z.B. "25-05-2025" >= "27-09-2026"), was logisch falsch ist.
+5. Toter Code & unklare Rückgabewerte:
+   mark_done() gibt immer den String "Erledigt" zurück, selbst wenn kein Task gefunden wurde.
+   process_tasks() enthält ein unbehandeltes '# TODO' und gibt starr 'False' zurück.
+"""
+
 import datetime
 import random
 
