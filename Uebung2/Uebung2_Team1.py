@@ -37,6 +37,40 @@ Stellen, die das Verständnis des Codes erschweren:
 5. Toter Code & unklare Rückgabewerte:
    mark_done() gibt immer den String "Erledigt" zurück, selbst wenn kein Task gefunden wurde.
    process_tasks() enthält ein unbehandeltes '# TODO' und gibt starr 'False' zurück.
+
+===============================================================================
+AUFGABE 2: Bewertung der Softwarequalität (Positiv / Negativ) & Verbesserungen
+===============================================================================
+
+Positiv zu bewerten:
++ Ansätze zur Modularisierung (Aufteilung in einzelne Funktionen).
++ Sprechende Funktionsnamen (z.B. add_task, remove_task, show_tasks).
++ Verwendung von Standardbibliotheken (datetime, random).
+
+Negativ zu bewerten:
+- Mangelhafte Datenstruktur: Verwendung von Listen statt Objekten/Dataclasses.
+- Fehlende Robustheit & Fehlerbehandlung: Keine Typ-/Eingabeprüfung.
+- Fehlende Dokumentation: Keine Kommentare vorhanden.
+- Unvollständige Logik & Redundanz: backup_tasks wird befüllt, aber an keiner Stelle im Skript ausgelesen oder wiederhergestellt.
+- Verletzung von Clean Code Principles: Globale Zustände, magische Werte.
+
+===============================================================================
+IDENTIFIZIERTE SCHWACHSTELLEN UND MÖGLICHE VERBESSERUNGEN:
+===============================================================================
+1. Initialisierung 'tasks = None': Auf 'tasks = {}' korrigieren.
+2. Singleton-Vergleich 'task_id == None': Durch PEP8 'task_id is None' ersetzen.
+3. Unnötige 'global'-Anweisungen: In remove_task, mark_done, show_tasks entfernen.
+4. Desynchronisierte 'backup_tasks': In remove_task() den Eintrag löschen.
+5. Ungenutzte 'task_id' in mark_done(): Iteration über tasks.values() umgestellen.
+6. Falscher Rückgabewert in mark_done(): Gibt "Erledigt" oder "Nicht gefunden" zurück.
+7. Zu lange Codezeile in show_tasks(): Formatierung auf < 100 Zeichen anpassen.
+8. Toter Code in process_tasks(): '# TODO' entfernen und dynamischen Rückgabewert nutzen.
+9. TypeError in calculate_task_average(): Prioritätsmittelwert berechnen.
+10. Fehlerhafter String-Datumsvergleich: Konvertierung in datetime.date-Objekte.
+11. Falsche Sortierung in upcoming_tasks(): Nach Fälligkeitsdatum sortieren.
+12. Ineffizientes Zählen in get_task_count(): sum() durch len(tasks) ersetzen.
+13. Fehlende Dokumentation: Kommentare pflegen.
+===============================================================================
 """
 
 import datetime
