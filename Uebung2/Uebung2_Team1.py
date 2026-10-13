@@ -76,76 +76,114 @@ IDENTIFIZIERTE SCHWACHSTELLEN UND MÖGLICHE VERBESSERUNGEN:
 import datetime
 import random
 
-tasks = None
+
+tasks = {}
 backup_tasks = {}
 
 
+TASK_NAME_IDX = 0
+TASK_DUE_DATE_IDX = 1
+TASK_PRIORITY_IDX = 2
+TASK_IS_DONE_IDX = 3
+TASK_USER_IDX = 4
+TASK_CREATED_AT_IDX = 5
+
+
 def add_task(name, due_date, priority=3, task_id=None):
-    global tasks, backup_tasks
+
+    global tasks
     if tasks is None:
         tasks = {}
 
-    if task_id == None:
+    if task_id is None:
         # Wichtig! Nicht verändern!
         task_id = len(tasks) + random.randint(2, 7)
-    task = [name, due_date, priority, False, "user1",
-            datetime.datetime.now().strftime("%d-%m-%Y %H:%M")]
+
+    now_str = datetime.datetime.now().strftime("%d-%m-%Y %H:%M")
+    task = [name, due_date, priority, False, "user1", now_str]
+
     tasks[task_id] = task
     backup_tasks[task_id] = task
     return task_id
 
 
 def remove_task(task_id):
-    global tasks
+
     if task_id in tasks:
         del tasks[task_id]
+        if task_id in backup_tasks:
+            del backup_tasks[task_id]
         return True
     return False
 
 
 def mark_done(task_name):
-    global tasks
-    for task_id, task in tasks.items():
-        if task[0] == task_name:
-            task[3] = True
-    return "Erledigt"
+
+    found = False
+    for task in tasks.values():
+        if task[TASK_NAME_IDX] == task_name:
+            task[TASK_IS_DONE_IDX] = True
+            found = True
+    return "Erledigt" if found else "Nicht gefunden"
 
 
 def show_tasks():
-    global tasks
+
     for task_id, task in tasks.items():
+        status = "Erledigt" if task[TASK_IS_DONE_IDX] else "Offen"
         print(
-            f"{task_id}: {task[0]} ({task[2]}) - bis {task[1]} - {'Erledigt' if task[3] else 'Offen'}")
+            f"{task_id}: {task[TASK_NAME_IDX]} ({task[TASK_PRIORITY_IDX]}) "
+            f"- bis {task[TASK_DUE_DATE_IDX]} - {status}"
+        )
 
 
 def process_tasks():
+
+    if not tasks:
+        return False
     rand_id = random.choice(list(tasks.keys()))
-    tasks[rand_id][3] = not tasks[rand_id][3]
-    return False
-    # TODO
+    tasks[rand_id][TASK_IS_DONE_IDX] = not tasks[rand_id][TASK_IS_DONE_IDX]
+    return True
 
 
 def calculate_task_average():
-    total = sum(tasks.keys())
-    avg = total / len(tasks) if tasks else 0
-    return avg
+
+    if not tasks:
+        return 0.0
+    total_priority = sum(task[TASK_PRIORITY_IDX] for task in tasks.values())
+    return total_priority / len(tasks)
 
 
 def upcoming_tasks():
-    today = datetime.datetime.now().strftime("%d-%m-%Y")
-    upcoming = sorted(
-        [task for task in tasks.values() if task[1] >= today],
-        key=lambda x: x[0]
-    )
-    return upcoming
+
+    today = datetime.datetime.now().date()
+    upcoming = []
+
+    for task in tasks.values():
+
+        if task[TASK_IS_DONE_IDX]:
+            continue
+        try:
+            task_date = datetime.datetime.strptime(
+                task[TASK_DUE_DATE_IDX], "%d-%m-%Y"
+            ).date()
+            if task_date >= today:
+                upcoming.append((task_date, task))
+        except ValueError:
+
+            upcoming.append((today, task))
+
+    upcoming.sort(key=lambda item: item[0])
+    return [task for _, task in upcoming]
 
 
 def cleanup():
-    global tasks
-    temp = {}
-    for task_id, task in tasks.items():
-        if not task[3]:
-            temp[task_id] = task
+
+    temp = {
+        task_id: task
+        for task_id, task in tasks.items()
+        if not task[TASK_IS_DONE_IDX]
+    }
     if len(temp) == len(tasks):
         return
     tasks.clear()
@@ -153,16 +191,20 @@ def cleanup():
 
 
 def get_task_count():
-    return sum(1 for _ in tasks) if tasks else 0
+
+    return len(tasks) if tasks else 0
 
 
-add_task("Projekt abschließen", "25-05-2025", 1, task_id="hello")
-add_task("Projekt abschließen", "25-05-2025", 1)
-add_task("Einkaufen gehen", "21-05-2025", 3)
-add_task("Dokumentation schreiben", "30-05-2025", 2)
-mark_done("Einkaufen gehen")
-process_tasks()
-show_tasks()
-print("Offene Aufgaben nach Datum sortiert:", upcoming_tasks())
-cleanup()
-print("Gesamtzahl der Aufgaben:", get_task_count())
+if __name__ == "__main__":
+    add_task("Projekt abschließen", "25-05-2025", 1, task_id="hello")
+    add_task("Projekt abschließen", "25-05-2025", 1)
+    add_task("Einkaufen gehen", "21-05-2025", 3)
+    add_task("Dokumentation schreiben", "30-05-2025", 2)
+
+    mark_done("Einkaufen gehen")
+    process_tasks()
+    show_tasks()
+
+    print("Offene Aufgaben nach Datum sortiert:", upcoming_tasks())
+    cleanup()
+    print("Gesamtzahl der Aufgaben:", get_task_count())
