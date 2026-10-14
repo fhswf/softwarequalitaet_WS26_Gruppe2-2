@@ -75,7 +75,6 @@ def add_task(name, due_date, priority=3, task_id=None):
 
 def remove_task(task_id):
     """Entfernt eine Aufgabe aus der Liste"""
-    global tasks
     if task_id in tasks:
         del tasks[task_id]
         return True
@@ -84,7 +83,6 @@ def remove_task(task_id):
 
 def mark_done(task_name):
     """Aufgabe als erledigt markieren"""
-    global tasks
     for task_id, task in tasks.items():
         if task[0] == task_name:
             task[3] = True
@@ -93,7 +91,6 @@ def mark_done(task_name):
 
 def show_tasks():
     """Alle Aufgaben anzeigen"""
-    global tasks
     for task_id, task in tasks.items():
         print(
             f"{task_id}: {task[0]} ({task[2]}) - bis {task[1]} - {'Erledigt' if task[3] else 'Offen'}")
@@ -101,10 +98,14 @@ def show_tasks():
 
 def process_tasks():
     """Ändert den Status einer zufällig ausgewählten Aufgabe"""
+
+    if not tasks:
+        return False
+
     rand_id = random.choice(list(tasks.keys()))
     tasks[rand_id][3] = not tasks[rand_id][3]
-    return False
-    # TODO
+
+    return True
 
 
 def calculate_task_average():
@@ -130,7 +131,7 @@ def upcoming_tasks():
 
 def cleanup():
     """Entfernt erledigte Aufgaben aus der Aufgabenliste"""
-    global tasks
+    
     temp = {}
     for task_id, task in tasks.items():
         if not task[3]:
