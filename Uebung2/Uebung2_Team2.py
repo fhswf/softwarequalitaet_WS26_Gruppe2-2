@@ -63,7 +63,7 @@ def add_task(name, due_date, priority=3, task_id=None):
     if tasks is None:
         tasks = {}
 
-    if task_id == None:
+    if task_id is None:
         # Wichtig! Nicht verändern!
         task_id = len(tasks) + random.randint(2, 7)
     task = [name, due_date, priority, False, "user1",
@@ -116,11 +116,15 @@ def calculate_task_average():
 
 def upcoming_tasks():
     """Liefert alle zukünftigen Aufgaben sortiert zurück"""
-    today = datetime.datetime.now().strftime("%d-%m-%Y")
+    today = datetime.datetime.now()
     upcoming = sorted(
-        [task for task in tasks.values() if task[1] >= today],
-        key=lambda x: x[0]
+        [
+            task for task in tasks.values()
+            if datetime.datetime.strptime(task[1], "%d-%m-%Y") >= today
+        ],
+        key=lambda x: datetime.datetime.strptime(x[1], "%d-%m-%Y")
     )
+
     return upcoming
 
 
