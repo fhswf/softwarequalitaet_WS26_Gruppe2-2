@@ -69,7 +69,7 @@ def add_task(name, due_date, priority=3, task_id=None):
     task = [name, due_date, priority, False, "user1",
             datetime.datetime.now().strftime("%d-%m-%Y %H:%M")]
     tasks[task_id] = task
-    backup_tasks[task_id] = task
+    backup_tasks[task_id] = task.copy
     return task_id
 
 
@@ -83,10 +83,13 @@ def remove_task(task_id):
 
 def mark_done(task_name):
     """Aufgabe als erledigt markieren"""
+
     for task_id, task in tasks.items():
         if task[0] == task_name:
             task[3] = True
-    return "Erledigt"
+            return True
+
+    return False
 
 
 def show_tasks():
@@ -131,7 +134,7 @@ def upcoming_tasks():
 
 def cleanup():
     """Entfernt erledigte Aufgaben aus der Aufgabenliste"""
-    
+
     temp = {}
     for task_id, task in tasks.items():
         if not task[3]:
