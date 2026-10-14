@@ -30,6 +30,21 @@ Auffälligkeiten, die das Verständnis des Codes erschweren:
 - Mehrere Funktionen prüfen nicht, ob tasks den Wert None besitzt.
 - Die Datumswerte werden als Strings gespeichert, wodurch Vergleiche nicht sauber funktionieren.
 - Zuordnung der Tasks nicht einheitlich. mark_done arbeitet mit dem task namen. Dieser kann mehrfach auftauchen. 
+
+=======================
+Aufgabe 2:
+=======================
+
+Softwarequalität positiv:
+-Funktionen einzeln ausgelagert
+-Nachvollziehbare Funktionsnamen
+
+Softwarequalität negativ:
+-Datenstruktur Liste (Zugriff per Indizes)
+-Keine Dokumentation der Funktionen
+-Abfangen unsinniger Eingaben (Fehleranfällig)
+-Fehler in Datenvergleich (Weil falscher Datentyp)
+
 """
 
 import datetime
