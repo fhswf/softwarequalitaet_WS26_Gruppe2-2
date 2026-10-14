@@ -69,7 +69,7 @@ def add_task(name, due_date, priority=3, task_id=None):
     task = [name, due_date, priority, False, "user1",
             datetime.datetime.now().strftime("%d-%m-%Y %H:%M")]
     tasks[task_id] = task
-    backup_tasks[task_id] = task.copy
+    backup_tasks[task_id] = task.copy()
     return task_id
 
 
@@ -112,10 +112,13 @@ def process_tasks():
 
 
 def calculate_task_average():
-    """Durchschnittliche Aufgabendauer berechnen"""
-    total = sum(tasks.keys())
-    avg = total / len(tasks) if tasks else 0
-    return avg
+    """Berechnet die durchschnittliche Priorität aller Aufgaben"""
+
+    if not tasks:
+        return 0
+
+    priorities = [task[2] for task in tasks.values()]
+    return sum(priorities) / len(priorities)
 
 
 def upcoming_tasks():
