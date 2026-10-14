@@ -50,12 +50,16 @@ Softwarequalität negativ:
 import datetime
 import random
 
+#Speichert alle Aufgaben
 tasks = None
+#Speichert eine Kopie der Aufgaben
 backup_tasks = {}
 
 
 def add_task(name, due_date, priority=3, task_id=None):
+    """Erstellt eine neue Aufgabe und fügt sie der Aufgabenliste hinzu"""
     global tasks, backup_tasks
+    
     if tasks is None:
         tasks = {}
 
@@ -70,6 +74,7 @@ def add_task(name, due_date, priority=3, task_id=None):
 
 
 def remove_task(task_id):
+    """Entfernt eine Aufgabe aus der Liste"""
     global tasks
     if task_id in tasks:
         del tasks[task_id]
@@ -78,6 +83,7 @@ def remove_task(task_id):
 
 
 def mark_done(task_name):
+    """Aufgabe als erledigt markieren"""
     global tasks
     for task_id, task in tasks.items():
         if task[0] == task_name:
@@ -86,6 +92,7 @@ def mark_done(task_name):
 
 
 def show_tasks():
+    """Alle Aufgaben anzeigen"""
     global tasks
     for task_id, task in tasks.items():
         print(
@@ -93,6 +100,7 @@ def show_tasks():
 
 
 def process_tasks():
+    """Ändert den Status einer zufällig ausgewählten Aufgabe"""
     rand_id = random.choice(list(tasks.keys()))
     tasks[rand_id][3] = not tasks[rand_id][3]
     return False
@@ -100,12 +108,14 @@ def process_tasks():
 
 
 def calculate_task_average():
+    """Durchschnittliche Aufgabendauer berechnen"""
     total = sum(tasks.keys())
     avg = total / len(tasks) if tasks else 0
     return avg
 
 
 def upcoming_tasks():
+    """Liefert alle zukünftigen Aufgaben sortiert zurück"""
     today = datetime.datetime.now().strftime("%d-%m-%Y")
     upcoming = sorted(
         [task for task in tasks.values() if task[1] >= today],
@@ -115,6 +125,7 @@ def upcoming_tasks():
 
 
 def cleanup():
+    """Entfernt erledigte Aufgaben aus der Aufgabenliste"""
     global tasks
     temp = {}
     for task_id, task in tasks.items():
@@ -127,6 +138,7 @@ def cleanup():
 
 
 def get_task_count():
+    """Gibt die Anzahl der vorhanden Aufgaben aus"""
     return sum(1 for _ in tasks) if tasks else 0
 
 
