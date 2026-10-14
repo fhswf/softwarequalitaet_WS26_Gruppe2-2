@@ -45,6 +45,24 @@ Softwarequalität negativ:
 -Abfangen unsinniger Eingaben (Fehleranfällig)
 -Fehler in Datenvergleich (Weil falscher Datentyp)
 
+
+======================
+Aufgabe 4 (optional)
+======================
+
+************* Module Uebung2_Team2
+Uebung2/Uebung2_Team2.py:28:0: C0301: Line too long (102/100) (line-too-long)
+Uebung2/Uebung2_Team2.py:32:0: C0301: Line too long (112/100) (line-too-long)
+Uebung2/Uebung2_Team2.py:62:0: C0303: Trailing whitespace (trailing-whitespace)
+Uebung2/Uebung2_Team2.py:99:0: C0301: Line too long (103/100) (line-too-long)
+Uebung2/Uebung2_Team2.py:1:0: C0103: Module name "Uebung2_Team2" doesn't conform to snake_case naming style (invalid-name)
+Uebung2/Uebung2_Team2.py:54:0: C0103: Constant name "tasks" doesn't conform to UPPER_CASE naming style (invalid-name)
+Uebung2/Uebung2_Team2.py:61:4: W0602: Using global for 'backup_tasks' but no assignment is done (global-variable-not-assigned)
+Uebung2/Uebung2_Team2.py:87:8: W0612: Unused variable 'task_id' (unused-variable)
+
+-----------------------------------
+Your code has been rated at 8.75/10
+
 """
 
 import datetime
