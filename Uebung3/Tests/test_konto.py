@@ -1,3 +1,6 @@
+# RTRE
+# NOVE
+
 """
 Test-Template für die Konto-Klasse (Test-After Approach)
 ========================================================
@@ -21,7 +24,7 @@ import pytest
 from decimal import Decimal
 
 # TODO: Team A - Entkommentiert nach eurer Implementierung:
-# from ..Code.konto import Konto
+from .konto import Konto
 
 
 class TestKontoErstellung:
@@ -42,6 +45,12 @@ class TestKontoErstellung:
         """
         # TODO: Team A - Ersetzen Sie diesen Placeholder durch echte Tests
         assert True, "Placeholder - bitte durch echte Tests ersetzen!"
+
+        # Konto mit gültiger ID und positivem Saldo erstellen
+        def test_konto_erstellen_mit_gid_und_psaldo(self):
+            Konto = Konto(1, 50)
+            assert konto.kontoid == 1
+            assert konto.saldo == 50
 
         # Beispiel-Code (entkommentiert nach Implementierung):
         # konto = Konto(1, Decimal("100.00"))
