@@ -2,7 +2,7 @@
 # NOVE
 
 from decimal import Decimal
-from .interfaces import KontoInterface
+from interfaces import KontoInterface
 
 
 class Konto(KontoInterface):
@@ -29,20 +29,26 @@ class Konto(KontoInterface):
         self.konto_id = konto_id
         self.saldo = saldo
 
+    # Funktion Konto-ID ausgeben
     @property
     def konto_id(self) -> int:
-        # TODO: Implementierung
-        pass
+        return self._konto_id
 
+    # Funktion Saldo ausgeben
     @property
     def saldo(self) -> Decimal:
-        # TODO: Implementierung
-        pass
+        return self._saldo
 
+    # Funktion Einzahlen eines Betrags auf Konto
     def einzahlen(self, betrag: Decimal) -> None:
-        # TODO: Implementierung
-        pass
+        if betrag <= 0:
+            raise ValueError("Einzuzahlender Betrag muss positiv sein")
+        self.saldo += betrag
 
+    # Funktion Auszahlen eines Betrags vom Konto
     def auszahlen(self, betrag: Decimal) -> None:
-        # TODO: Implementierung
-        pass
+        if betrag <= 0:
+            raise ValueError("Abhebbarer Betrag muss positiv sein")
+        if self.saldo < betrag:
+            raise ValueError("Konto nicht ausreichend gedeckt")
+        self.saldo -= betrag
