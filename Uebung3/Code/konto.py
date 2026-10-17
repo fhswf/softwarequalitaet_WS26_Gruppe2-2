@@ -1,12 +1,6 @@
 # RTRE
 # NOVE
 
-"""
-Hier sollen Sie Ihre Implementierung der Konto-Klasse erstellen.
-
-TODO: Implementieren Sie die Konto-Klasse basierend auf dem KontoInterface
-"""
-
 from decimal import Decimal
 from .interfaces import KontoInterface
 
@@ -22,8 +16,18 @@ class Konto(KontoInterface):
     """
 
     def __init__(self, konto_id: int, saldo: Decimal = Decimal('0.00')):
-        # TODO: Implementierung
-        pass
+
+        # Saldo prüfen, ob er negativ ist
+        if saldo < 0:
+            raise ValueError("Saldo darf nicht negativ sein")
+
+        # Konto-ID prüfen, ob sie auch numerisch und nicht leer ist
+        if konto_id is None or not isinstance(konto_id, int):
+            raise ValueError("Konto-ID muss eine Zahl sein")
+
+        # Initialisierung der Klassenattribute
+        self.konto_id = konto_id
+        self.saldo = saldo
 
     @property
     def konto_id(self) -> int:
