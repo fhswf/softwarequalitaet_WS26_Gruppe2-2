@@ -185,13 +185,38 @@ class TestKontoGrenzfaelle:
 
     def test_placeholder_grenzfaelle(self):
         """TODO: Team A - Tests für Grenzfälle"""
-        # Beispiel-Tests:
-        # - Sehr große Beträge
-        # - Sehr kleine Beträge (Cent-Bereich)
-        # - Decimal-Präzision
-        # - String-Repräsentation (__str__, __repr__)
-        # - Gleichheit von Konten
-        assert True, "TODO: Tests für Grenzfälle implementieren"
+
+        # Test für sehr große Beträge
+        def test_sehr_grosse_betraege(self):
+            konto = Konto(1018, Decimal("1000000000.00"))
+            konto.einzahlen(Decimal("500000000.00"))
+            assert konto.saldo == Decimal("1500000000.00")
+
+        # Test für sehr kleine Beträge (Cent-Bereich)
+        def test_sehr_kleine_betraege(self):
+            konto = Konto(1019, Decimal("0.01"))
+            konto.einzahlen(Decimal("0.01"))
+            assert konto.saldo == Decimal("0.02")
+
+        # Test für Decimal-Präzision
+        def test_decimal_praezision(self):
+            konto = Konto(1020, Decimal("0.123456789"))
+            konto.einzahlen(Decimal("0.000000001"))
+            assert konto.saldo == Decimal("0.123456790")
+
+        # Test für String-Repräsentation (__str__, __repr__)
+        def test_string_representations(self):
+            konto = Konto(1021, Decimal("100.00"))
+            assert str(konto) == "Konto(ID: 1021, Saldo: 100.00)"
+            assert repr(konto) == "Konto(ID: 1021, Saldo: 100.00)"
+
+        # Test für Gleichheit von Konten
+        def test_konto_equality(self):
+            konto1 = Konto(1022, Decimal("50.00"))
+            konto2 = Konto(1022, Decimal("50.00"))
+            konto3 = Konto(1023, Decimal("50.00"))
+            assert konto1 == konto2
+            assert konto1 != konto3
 
 
 # TODO: Team A - Erweitern Sie diese Klassen oder fügen Sie neue hinzu!
