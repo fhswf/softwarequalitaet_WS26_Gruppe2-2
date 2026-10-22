@@ -34,15 +34,6 @@ class TestKontoErstellung:
     """
 
     def test_placeholder_konto_erstellung(self):
-        """
-        Placeholder-Test - ersetzen Sie diesen durch echte Tests!
-
-        Beispiele für Tests, die Sie schreiben könnten:
-        - Konto mit gültiger ID und positivem Saldo erstellen
-        - Konto mit gültiger ID und Saldo 0 erstellen  
-        - Konto mit ungültiger ID (negativ, 0, String) → Exception?
-        - Konto mit ungültigem Saldo (negativ, String) → Exception?
-        """
 
         # Konto mit gültiger ID und positivem Saldo erstellen
         def test_konto_erstellen_mit_gid_und_psaldo(self):
@@ -85,7 +76,11 @@ class TestKontoEigenschaften:
         # - konto.konto_id gibt korrekte ID zurück
         # - konto.saldo gibt korrekten Saldo zurück
         # - Properties sind read-only (falls gewünscht)
-        assert True, "TODO: Tests für Eigenschaften implementieren"
+
+        # konto.konto_id gibt korrekte ID zurück
+        def test_konto_id_property(self):
+            konto = Konto(1004, 20)
+            assert konto.konto_id == 1004
 
 
 class TestEinzahlung:
