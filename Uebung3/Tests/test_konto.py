@@ -99,13 +99,36 @@ class TestEinzahlung:
 
     def test_placeholder_einzahlung(self):
         """TODO: Team A - Tests für einzahlen() Methode"""
-        # Beispiel-Tests:
-        # - Einzahlung von positivem Betrag
-        # - Saldo wird korrekt erhöht
-        # - Einzahlung von 0 → Exception?
-        # - Einzahlung von negativem Betrag → Exception?
-        # - Einzahlung von ungültigem Typ → Exception?
-        assert True, "TODO: Tests für Einzahlung implementieren"
+
+        # Einzahlung vom pos Beitrag
+        def test_einzahlung_pos_betrag(self):
+            konto = Konto(1007, 10)
+            konto.einzahlen(Decimal("20.00"))
+            assert konto.saldo == Decimal("30.00")
+
+        # Saldo korrekt erhöht
+        def test_saldo_korrekt_erhoeht(self):
+            konto = Konto(1008, 15)
+            konto.einzahlen(Decimal("5.00"))
+            assert konto.saldo == Decimal("20.00")
+
+        # Einzahlung von 0 mit pytest
+        def test_einzahlung_von_null(self):
+            konto = Konto(1009, 10)
+            with pytest.raises(ValueError):
+                konto.einzahlen(Decimal("0.00"))
+
+        # Einzahlung von negativem Betrag mit pytest
+        def test_einzahlung_von_negativem_betrag(self):
+            konto = Konto(1010, 10)
+            with pytest.raises(ValueError):
+                konto.einzahlen(Decimal("-5.00"))
+
+        # Einzahlung von ungültigem Typ mit pytest
+        def test_einzahlung_von_ungueltigem_typ(self):
+            konto = Konto(1011, 10)
+            with pytest.raises(TypeError):
+                konto.einzahlen("fünf")
 
 
 class TestAuszahlung:
