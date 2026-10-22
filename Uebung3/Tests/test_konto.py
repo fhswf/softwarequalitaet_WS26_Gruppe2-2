@@ -82,6 +82,11 @@ class TestKontoEigenschaften:
             konto = Konto(1004, 20)
             assert konto.konto_id == 1004
 
+        # konto.saldo gibt korrekten Saldo zurück
+        def test_konto_saldo_property(self):
+            konto = Konto(1005, 30)
+            assert konto.saldo == Decimal("30.00")
+
 
 class TestEinzahlung:
     """
