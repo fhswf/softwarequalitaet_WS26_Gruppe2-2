@@ -139,14 +139,42 @@ class TestAuszahlung:
 
     def test_placeholder_auszahlung(self):
         """TODO: Team A - Tests für auszahlen() Methode"""
-        # Beispiel-Tests:
-        # - Auszahlung bei ausreichendem Saldo
-        # - Saldo wird korrekt reduziert
-        # - Auszahlung bei unzureichendem Saldo → Exception?
-        # - Auszahlung von 0 → Exception?
-        # - Auszahlung von negativem Betrag → Exception?
-        # - Überziehung vermeiden
-        assert True, "TODO: Tests für Auszahlung implementieren"
+
+        # Auszahlung bei ausreichendem Saldo
+        def test_auszahlung_bei_ausreichendem_saldo(self):
+            konto = Konto(1012, 50)
+            konto.auszahlen(Decimal("20.00"))
+            assert konto.saldo == Decimal("30.00")
+
+        # Saldo wird korrekt reduziert
+        def test_saldo_korrekt_reduziert(self):
+            konto = Konto(1013, 40)
+            konto.auszahlen(Decimal("10.00"))
+            assert konto.saldo == Decimal("30.00")
+
+        # Auszahlung bei unzureichendem Saldo mit pytest
+        def test_auszahlung_bei_unzureichendem_saldo(self):
+            konto = Konto(1014, 10)
+            with pytest.raises(ValueError):
+                konto.auszahlen(Decimal("20.00"))
+
+        # Auszahlung von 0 mit pytest
+        def test_auszahlung_von_null(self):
+            konto = Konto(1015, 10)
+            with pytest.raises(ValueError):
+                konto.auszahlen(Decimal("0.00"))
+
+        # Auszahlung von negativem Betrag mit pytest
+        def test_auszahlung_von_negativem_betrag(self):
+            konto = Konto(1016, 10)
+            with pytest.raises(ValueError):
+                konto.auszahlen(Decimal("-5.00"))
+
+        # Überziehung vermeiden
+        def test_ueberziehung_vermeiden(self):
+            konto = Konto(1017, 10)
+            with pytest.raises(ValueError):
+                konto.auszahlen(Decimal("15.00"))
 
 
 class TestKontoGrenzfaelle:
