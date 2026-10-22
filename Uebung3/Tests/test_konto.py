@@ -43,19 +43,18 @@ class TestKontoErstellung:
         - Konto mit ungültiger ID (negativ, 0, String) → Exception?
         - Konto mit ungültigem Saldo (negativ, String) → Exception?
         """
-        # TODO: Team A - Ersetzen Sie diesen Placeholder durch echte Tests
-        assert True, "Placeholder - bitte durch echte Tests ersetzen!"
 
         # Konto mit gültiger ID und positivem Saldo erstellen
         def test_konto_erstellen_mit_gid_und_psaldo(self):
-            Konto = Konto(1, 50)
+            Konto = Konto(1000, 50)
             assert konto.kontoid == 1
-            assert konto.saldo == 50
+            assert konto.saldo == Decimal("50.00")
 
-        # Beispiel-Code (entkommentiert nach Implementierung):
-        # konto = Konto(1, Decimal("100.00"))
-        # assert konto.konto_id == 1
-        # assert konto.saldo == Decimal("100.00")
+        # Konto mit gültiger ID und Saldo 0 erstellen
+        def test_konto_erstellen_mit_gid_und_nullsaldo(self):
+            Konto = Konto(1001, 0)
+            assert konto.kontoid == 1
+            assert konto.saldo == Decimal("0.00")
 
 
 class TestKontoEigenschaften:
