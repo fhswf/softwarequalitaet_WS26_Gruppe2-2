@@ -56,6 +56,15 @@ class TestKontoErstellung:
             assert konto.kontoid == 1
             assert konto.saldo == Decimal("0.00")
 
+        # Konto mit ungültiger ID (negativ, 0, String) mit pytest
+        def test_konto_erstellen_mit_ungueltiger_id(self):
+            with pytest.raises(ValueError):
+                Konto(-1, 50)
+            with pytest.raises(ValueError):
+                Konto(0, 50)
+            with pytest.raises(ValueError):
+                Konto("abc", 50)
+
 
 class TestKontoEigenschaften:
     """
