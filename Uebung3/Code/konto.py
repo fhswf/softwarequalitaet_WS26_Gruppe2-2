@@ -2,7 +2,7 @@
 # NOVE
 
 from decimal import Decimal
-from interfaces import KontoInterface
+from .interfaces import KontoInterface
 
 
 class Konto(KontoInterface):

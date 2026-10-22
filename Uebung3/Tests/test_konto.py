@@ -23,8 +23,8 @@ Tipps für gute Tests:
 import pytest
 from decimal import Decimal
 
-# TODO: Team A - Entkommentiert nach eurer Implementierung:
-from .konto import Konto
+
+from ..Code.konto import Konto
 
 
 class TestKontoErstellung:
@@ -37,14 +37,14 @@ class TestKontoErstellung:
 
         # Konto mit gültiger ID und positivem Saldo erstellen
         def test_konto_erstellen_mit_gid_und_psaldo(self):
-            Konto = Konto(1000, 50)
-            assert konto.kontoid == 1
+            konto = Konto(1000, 50)
+            assert konto.konto_id == 1000
             assert konto.saldo == Decimal("50.00")
 
         # Konto mit gültiger ID und Saldo 0 erstellen
         def test_konto_erstellen_mit_gid_und_nullsaldo(self):
             Konto = Konto(1001, 0)
-            assert konto.kontoid == 1
+            assert konto.kontoid == 1001
             assert konto.saldo == Decimal("0.00")
 
         # Konto mit ungültiger ID (negativ, 0, String) mit pytest
@@ -217,10 +217,3 @@ class TestKontoGrenzfaelle:
             konto3 = Konto(1023, Decimal("50.00"))
             assert konto1 == konto2
             assert konto1 != konto3
-
-
-# TODO: Team A - Erweitern Sie diese Klassen oder fügen Sie neue hinzu!
-# Weitere mögliche Test-Klassen:
-# - TestKontoStringRepresentation
-# - TestKontoEquality
-# - TestKontoValidation
