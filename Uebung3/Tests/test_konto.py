@@ -71,11 +71,6 @@ class TestKontoEigenschaften:
     """
 
     def test_placeholder_eigenschaften(self):
-        """TODO: Team A - Tests für Properties"""
-        # Beispiel-Tests:
-        # - konto.konto_id gibt korrekte ID zurück
-        # - konto.saldo gibt korrekten Saldo zurück
-        # - Properties sind read-only (falls gewünscht)
 
         # konto.konto_id gibt korrekte ID zurück
         def test_konto_id_property(self):
@@ -86,6 +81,14 @@ class TestKontoEigenschaften:
         def test_konto_saldo_property(self):
             konto = Konto(1005, 30)
             assert konto.saldo == Decimal("30.00")
+
+        # Properties sind read-only mit pytest
+        def test_properties_read_only(self):
+            konto = Konto(1006, 40)
+            with pytest.raises(AttributeError):
+                konto.konto_id = 2000
+            with pytest.raises(AttributeError):
+                konto.saldo = Decimal("50.00")
 
 
 class TestEinzahlung:
