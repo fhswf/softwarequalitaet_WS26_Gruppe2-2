@@ -65,6 +65,13 @@ class TestKontoErstellung:
             with pytest.raises(ValueError):
                 Konto("abc", 50)
 
+         # Konto mit ungültigem Saldo (negativ, String) mit pytest
+        def test_konto_erstellen_mit_ungueltigem_saldo(self):
+            with pytest.raises(ValueError):
+                Konto(1002, -10)
+            with pytest.raises(ValueError):
+                Konto(1003, "abc")
+
 
 class TestKontoEigenschaften:
     """
