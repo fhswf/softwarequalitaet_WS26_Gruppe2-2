@@ -1,3 +1,5 @@
+# Implementiert von: TNSS, JYBS
+
 """
 Test-Template für die KontoService-Klasse (Test-After Approach)
 ===============================================================
