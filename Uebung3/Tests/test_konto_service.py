@@ -1,147 +1,154 @@
-# Implementiert von: AI, Assistant
 """
 Test-Template für die KontoService-Klasse (Test-After Approach)
 ===============================================================
 
-Tests für den Service implementiert nach Team B Vorgabe
+TODO: Team B - Implementieren Sie hier Ihre Tests NACH der KontoService-Implementierung!
+
+Arbeitsablauf:
+1. Implementieren Sie zuerst die KontoService-Klasse in Code/konto_service.py
+2. Schreiben Sie dann hier umfassende Tests für Ihren Service
+3. Testen Sie alle Service-Methoden gründlich
+4. Dokumentieren Sie Ihre Autorschaft in den Tests
+
+Tipps für Service-Tests:
+- Nutzen Sie pytest fixtures für Setup/Teardown
+- Testen Sie Integration zwischen Service und Konto-Klasse
+- Testen Sie sowohl normale als auch Grenzfälle
+- Testen Sie Validierungslogik im Service
 """
 
 import pytest
 from decimal import Decimal
 
 # TODO: Team B - Entkommentieren Sie nach Ihrer Implementierung:
-from Uebung3.Code.konto_service import KontoService
+# from ..Code.konto_service import KontoService
 # from ..Code.konto import Konto
-
-@pytest.fixture
-def service():
-    return KontoService()
-
 
 class TestKontoServiceErstellung:
     """
     Tests für KontoService-Erstellung und Setup
+    TODO: Team B - Testet Service-Initialisierung
     """
 
-    def test_service_erstellung(self, service):
+    def test_placeholder_service_erstellung(self):
         """
-        Testet die Erstellung eines leeren Services.
+        Placeholder-Test - ersetzen Sie diesen durch echte Tests!
+
+        Beispiele für Tests:
+        - Service ohne Parameter erstellen
+        - Service mit initialen Konten erstellen
+        - Service-Zustand nach Erstellung prüfen
         """
-        assert service is not None
-        assert len(service.konten_auflisten()) == 0
+        # TODO: Team B - Ersetzen Sie diesen Placeholder durch echte Tests
+        assert True, "Placeholder - bitte durch echte Tests ersetzen!"
+
+        # Beispiel-Code (entkommentiert nach Implementierung):
+        # service = KontoService()
+        # assert len(service.konten_auflisten()) == 0
 
 
 class TestKontoVerwaltung:
     """
     Tests für Konto-Erstellung und -Verwaltung
+    TODO: Team B - Testet alle Konto-Verwaltungs-Funktionen
     """
 
-    def test_konto_erstellen(self, service):
-        """Testet konto_erstellen()"""
-        konto_id = service.konto_erstellen(Decimal('100.00'))
-        
-        assert konto_id == 1
-        konten = service.konten_auflisten()
-        assert len(konten) == 1
-        assert konten[0]['konto_id'] == 1
-        # Dummy Konto gibt immer 100.00 zurück, auch wenn was anderes übergeben wird
+    def test_placeholder_konto_erstellen(self):
+        """TODO: Team B - Tests für konto_erstellen()"""
+        # Beispiel-Tests:
+        # - Konto mit gültigem Saldo erstellen
+        # - Konto-ID wird automatisch vergeben
+        # - Konto wird zur internen Liste hinzugefügt
+        # - Rückgabe der Konto-ID
+        # - Erstellen mit ungültigem Saldo → Exception?
+        assert True, "TODO: Tests für konto_erstellen implementieren"
 
-    def test_konten_auflisten(self, service):
-        """Testet konten_auflisten()"""
-        service.konto_erstellen(Decimal('100.00'))
-        service.konto_erstellen(Decimal('200.00'))
-        
-        konten = service.konten_auflisten()
-        assert len(konten) == 2
-        # Da der dummy hier nicht gut mitmacht, können wir nur die Länge testen.
-        # Später in Phase 3 wird das genauer testbar.
-
+    def test_placeholder_konten_auflisten(self):
+        """TODO: Team B - Tests für konten_auflisten()"""
+        # Beispiel-Tests:
+        # - Leere Liste bei Service-Start
+        # - Liste nach Konto-Erstellung
+        # - Korrekte Anzahl und Inhalte
+        assert True, "TODO: Tests für konten_auflisten implementieren"
 
 class TestTransaktionen:
     """
     Tests für Transaktions-Funktionen
+    TODO: Team B - Testet alle Geldtransaktionen über den Service
     """
 
-    def test_einzahlen(self, service):
-        """Testet einzahlen() indirekt über das Konto (wenn der Service dies in Zukunft anbietet)
-        Hinweis: Das Interface fordert diese Methode nicht auf dem Service!
-        Wir rufen stattdessen einzahlen() auf dem Konto auf (sofern wir drankommen).
-        """
-        konto_id = service.konto_erstellen(Decimal('100.00'))
-        
-        # Act
-        # Da wir über den Service keine Einzahlen-Methode haben, testen wir
-        # ob das DummyKonto reagiert (was es nicht tut).
-        # In Phase 3 mit echtem Konto wird dies sinnvoller.
-        konto = service._get_konto(konto_id)
-        konto.einzahlen(Decimal('50.00'))
-        
-        # Assert
-        # Dummy gibt immer 100 zurück
-        assert konto.saldo == Decimal('100.00')
+    def test_placeholder_einzahlen(self):
+        """TODO: Team B - Tests für einzahlen()"""
+        # Beispiel-Tests:
+        # - Einzahlung auf existierendes Konto
+        # - Saldo wird korrekt erhöht
+        # - Einzahlung auf nicht-existierendes Konto → Exception?
+        # - Ungültiger Betrag → Exception?
+        assert True, "TODO: Tests für einzahlen implementieren"
 
-    def test_auszahlen(self, service):
-        """Testet auszahlen() auf dem Konto über den Service."""
-        konto_id = service.konto_erstellen(Decimal('100.00'))
-        
-        # Act
-        konto = service._get_konto(konto_id)
-        konto.auszahlen(Decimal('50.00'))
-        
-        # Assert
-        # Dummy gibt immer 100 zurück
-        assert konto.saldo == Decimal('100.00')
+    def test_placeholder_auszahlen(self):
+        """TODO: Team B - Tests für auszahlen()"""
+        # Beispiel-Tests:
+        # - Auszahlung bei ausreichendem Saldo
+        # - Saldo wird korrekt reduziert
+        # - Auszahlung bei unzureichendem Saldo → Exception?
+        # - Auszahlung von nicht-existierendem Konto → Exception?
+        assert True, "TODO: Tests für auszahlen implementieren"
 
-    def test_ueberweisen(self, service):
-        """Testet ueberweisen()"""
-        konto1_id = service.konto_erstellen(Decimal('100.00'))
-        konto2_id = service.konto_erstellen(Decimal('50.00'))
-        
-        service.ueberweisen(konto1_id, konto2_id, Decimal('20.00'))
-        
-        # Dummy ändert nichts am Saldo, wirft aber auch keine Fehler
+    def test_placeholder_ueberweisen(self):
+        """TODO: Team B - Tests für ueberweisen()"""
+        # Beispiel-Tests:
+        # - Überweisung zwischen existierenden Konten
+        # - Sender-Saldo wird reduziert
+        # - Empfänger-Saldo wird erhöht
+        # - Überweisung bei unzureichendem Saldo → Exception?
+        # - Überweisung an nicht-existierendes Konto → Exception?
+        # - Überweisung von nicht-existierendem Konto → Exception?
+        assert True, "TODO: Tests für ueberweisen implementieren"
 
 
 class TestSaldoFunktionen:
     """
     Tests für Saldo-bezogene Funktionen
+    TODO: Team B - Testet Saldo-Abfragen und -Berechnungen
     """
 
-    def test_gesamtsaldo(self, service):
-        """Testet gesamtsaldo_berechnen()"""
-        assert service.gesamtsaldo_berechnen() == Decimal('0.00')
-        
-        service.konto_erstellen(Decimal('100.00'))
-        service.konto_erstellen(Decimal('50.00'))
-        
-        # Da Dummy immer 100 zurückgibt, ist der Gesamtsaldo 200
-        assert service.gesamtsaldo_berechnen() == Decimal('200.00')
+    def test_placeholder_gesamtsaldo(self):
+        """TODO: Team B - Tests für gesamtsaldo()"""
+        # Beispiel-Tests:
+        # - Gesamtsaldo bei leerer Kontenliste (0)
+        # - Gesamtsaldo mit einem Konto
+        # - Gesamtsaldo mit mehreren Konten
+        # - Korrekte Summe aller Salden
+        assert True, "TODO: Tests für gesamtsaldo implementieren"
 
 
 class TestUtilityFunktionen:
     """
     Tests für Hilfsfunktionen
+    TODO: Team B - Testet ID-Verwaltung und Export-Funktionen
     """
 
-    def test_get_max_konto_id(self, service):
-        """Testet get_max_konto_id()"""
-        assert service.get_max_konto_id() == 0
-        
-        service.konto_erstellen(Decimal('0.00'))
-        assert service.get_max_konto_id() == 1
-
+    def test_placeholder_get_max_konto_id(self):
+        """TODO: Team B - Tests für get_max_konto_id()"""
+        # Beispiel-Tests:
+        # - Erste ID ist 1
+        # - IDs werden fortlaufend vergeben
+        # - Keine doppelten IDs
+        assert True, "TODO: Tests für get_max_konto_id implementieren"
 
 class TestKontoServiceIntegration:
     """
     Integration-Tests zwischen Service und Konto-Klassen
+    TODO: Team B - Testet das Zusammenspiel aller Komponenten
     """
 
-    def test_vollstaendiger_workflow(self, service):
-        """Test für kompletten Workflow"""
-        k1 = service.konto_erstellen(Decimal('100.00'))
-        k2 = service.konto_erstellen(Decimal('50.00'))
-        
-        service.ueberweisen(k1, k2, Decimal('10.00'))
-        
-        # Gesamtsaldo mit Dummys ist 200 (100 + 100)
-        assert service.gesamtsaldo_berechnen() == Decimal('200.00')
+    def test_placeholder_vollstaendiger_workflow(self):
+        """TODO: Team B - Test für kompletten Workflow"""
+        # Beispiel-Test:
+        # 1. Service erstellen
+        # 2. Mehrere Konten erstellen
+        # 3. Einzahlungen durchführen
+        # 4. Überweisungen durchführen
+        # 5. Gesamtsaldo prüfen
+        assert True, "TODO: Integration-Test implementieren"
