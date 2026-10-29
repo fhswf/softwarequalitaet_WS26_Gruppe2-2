@@ -9,7 +9,7 @@ from .interfaces import KontoServiceInterface, KontoInterface
 
 
 # TODO: Team B - Später ersetzt ihr diesen Import durch Team A's Implementation:
-# from .konto import Konto
+from .konto import Konto
 
 
 class KontoService(KontoServiceInterface):
@@ -36,29 +36,29 @@ class KontoService(KontoServiceInterface):
 
         # EXTREM EINFACHE DUMMY-IMPLEMENTATION für Team B:
         # Macht fast nichts, gibt nur konstante Werte zurück!
-        class DummyKonto(KontoInterface):
-            def __init__(self, konto_id: int, saldo: Decimal):
+        #class DummyKonto(KontoInterface):
+            #def __init__(self, konto_id: int, saldo: Decimal):
                 # Speichert die Werte, aber macht keine Validierung!
-                pass
+                #pass
 
-            @property
-            def konto_id(self) -> int:
-                return 1  # ← Immer konstant 1!
+            #@property
+            #def konto_id(self) -> int:
+                #return 1  # ← Immer konstant 1!
 
-            @property
-            def saldo(self) -> Decimal:
-                return Decimal("100.00")  # ← Immer konstant 100!
+            #@property
+            #def saldo(self) -> Decimal:
+                #return Decimal("100.00")  # ← Immer konstant 100!
 
-            def einzahlen(self, betrag: Decimal) -> None:
-                pass  # ← Macht nichts!
+            #def einzahlen(self, betrag: Decimal) -> None:
+                #pass  # ← Macht nichts!
 
-            def auszahlen(self, betrag: Decimal) -> None:
-                pass  # ← Macht nichts, wirft keine Fehler!
+            #def auszahlen(self, betrag: Decimal) -> None:
+                #pass  # ← Macht nichts, wirft keine Fehler!
 
-        return DummyKonto(konto_id, saldo)
+        return DummyKonto(konto_id, saldo)"""
 
         # TODO: Team B - Später ersetzen Sie die obige Dummy-Implementation durch:
-        # return Konto(konto_id, saldo)
+        return Konto(konto_id, saldo)
 
     def konten_auflisten(self) -> List[Dict]:
         return [{"konto_id": k.konto_id, "saldo": k.saldo} for k in self._konten]
