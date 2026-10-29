@@ -101,7 +101,7 @@ class TestTransaktionen:
         
         # Saldo wird korrekt erhöht 
         # (Hinweis: Dummy liefert immer 100.00 zurück, schlägt ggf. in Phase 2 fehl)
-        assert konto.saldo == Decimal('100.00')
+        assert konto.saldo == Decimal('150.00')
         
         # Einzahlung auf nicht-existierendes Konto -> Exception
         with pytest.raises(ValueError):
@@ -120,7 +120,7 @@ class TestTransaktionen:
         - Auszahlung von nicht-existierendem Konto → Exception?
         """
         service = KontoService()
-        konto_id = service.konto_erstellen(Decimal('100.00'))
+        konto_id = service.konto_erstellen(Decimal('80.00'))
         konto = service._get_konto(konto_id)
         
         # Auszahlung bei ausreichendem Saldo
@@ -192,7 +192,7 @@ class TestSaldoFunktionen:
         
         # Gesamtsaldo mit mehreren Konten
         service.konto_erstellen(Decimal('50.00'))
-        assert service.gesamtsaldo_berechnen() == Decimal('200.00')
+        assert service.gesamtsaldo_berechnen() == Decimal('150.00')
 
 
 class TestUtilityFunktionen:
@@ -245,4 +245,4 @@ class TestKontoServiceIntegration:
         
         # 5. Gesamtsaldo prüfen
         # Da zwei Dummy-Konten existieren, die je 100.00 Saldo haben:
-        assert service.gesamtsaldo_berechnen() == Decimal('200.00')
+        assert service.gesamtsaldo_berechnen() == Decimal('170.00')
