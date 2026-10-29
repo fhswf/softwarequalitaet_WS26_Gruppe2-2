@@ -127,7 +127,7 @@ class TestTransaktionen:
         konto.auszahlen(Decimal('20.00'))
         
         # Saldo wird korrekt reduziert (Dummy hat immer 100)
-        assert konto.saldo == Decimal('100.00')
+        assert konto.saldo == Decimal('60.00')
         
         # Auszahlung bei unzureichendem Saldo -> Exception
         # (Schlägt bei DummyKonto fehl)
