@@ -24,7 +24,7 @@ import pytest
 from decimal import Decimal
 
 
-from ..Code.konto import Konto
+from Uebung3.Code.konto import Konto
 
 
 class TestKontoErstellung:
