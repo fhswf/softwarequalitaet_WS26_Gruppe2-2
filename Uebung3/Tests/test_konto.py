@@ -43,7 +43,7 @@ class TestKontoErstellung:
 
         # Konto mit gültiger ID und Saldo 0 erstellen
         def test_konto_erstellen_mit_gid_und_nullsaldo(self):
-            Konto = Konto(1001, 0)
+            konto = Konto(1001, 0)
             assert konto.kontoid == 1001
             assert konto.saldo == Decimal("0.00")
 
