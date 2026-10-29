@@ -55,7 +55,7 @@ class KontoService(KontoServiceInterface):
             #def auszahlen(self, betrag: Decimal) -> None:
                 #pass  # ← Macht nichts, wirft keine Fehler!
 
-        return DummyKonto(konto_id, saldo)"""
+        #return DummyKonto(konto_id, saldo)
 
         # TODO: Team B - Später ersetzen Sie die obige Dummy-Implementation durch:
         return Konto(konto_id, saldo)
