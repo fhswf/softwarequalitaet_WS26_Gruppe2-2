@@ -1,3 +1,5 @@
+# NOVE
+# TNSS
 """
 TDD-Template für FizzBuzz Kata
 ==============================
@@ -16,9 +18,7 @@ Autorschaft dokumentieren: Wer hat welchen TDD-Schritt gemacht?
 """
 
 import pytest
-
-# TODO: Team A - Import nach erster Implementierung:
-# from ..Code.fizzbuzz_kata import fizzbuzz
+from ..Code.fizzbuzz_kata import fizzbuzz
 
 
 class TestFizzBuzzTDD:
@@ -32,21 +32,9 @@ class TestFizzBuzzTDD:
     - Ein Test nach dem anderen!
     """
 
-    def test_placeholder_start_here(self):
-        """
-        TODO: Team A - Ersetzt diesen Placeholder durch euren ersten TDD-Test!
-
-        Ideen für den ersten Test:
-        - Was ist das einfachste Verhalten?
-        - fizzbuzz(1) sollte was zurückgeben?
-
-        TDD-Autor: [Name und Zeit]
-        """
-        # TODO: Euer erster TDD-Test hier
-        assert True, "Placeholder - startet hier mit TDD!"
-
-        # Beispiel-Idee (entfernt nach eigenem Test):
-        # assert fizzbuzz(1) == "1"
+    # TDD-Zyklus 1: RED von TNSS
+    def test_one_returns_its_string_representation(self):
+        assert fizzbuzz(1) == "1"
 
 
 class TestFizzBuzzErweitert:
