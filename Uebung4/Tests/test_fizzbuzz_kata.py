@@ -36,6 +36,13 @@ class TestFizzBuzzTDD:
     def test_one_returns_its_string_representation(self):
         assert fizzbuzz(1) == "1"
 
+    # TDD-Zyklus 1: GREEN von TNSS
+    # Die minimale Implementierung fuer diesen Test ist str(n).
+
+    # TDD-Zyklus 2: RED von NOVE
+    def test_three_returns_fizz(self):
+        assert fizzbuzz(3) == "Fizz"
+
 
 class TestFizzBuzzErweitert:
     """

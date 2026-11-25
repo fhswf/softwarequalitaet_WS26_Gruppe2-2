@@ -25,5 +25,4 @@ def fizzbuzz(n: int) -> str:
     Returns:
         "Fizz", "Buzz", "FizzBuzz" oder die Zahl als String
     """
-    # TODO: Implementierung mit TDD
-    pass
+    return str(n)
