@@ -43,6 +43,13 @@ class TestFizzBuzzTDD:
     def test_three_returns_fizz(self):
         assert fizzbuzz(3) == "Fizz"
 
+    # TDD-Zyklus 2: GREEN von TNSS
+    # Die minimale Implementierung prueft n % 3 == 0.
+
+    # TDD-Zyklus 3: RED von NOVE
+    def test_five_returns_buzz(self):
+        assert fizzbuzz(5) == "Buzz"
+
 
 class TestFizzBuzzErweitert:
     """
