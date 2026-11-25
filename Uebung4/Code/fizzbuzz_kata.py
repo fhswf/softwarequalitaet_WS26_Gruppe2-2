@@ -26,7 +26,14 @@ def fizzbuzz(n: int) -> str:
         "Fizz", "Buzz", "FizzBuzz" oder die Zahl als String
     """
     # TDD-Zyklus 2: GREEN von Team A
+    # TDD-Zyklus 4: GREEN von Team A
+    if n % 15 == 0:
+        return "FizzBuzz"
+
     if n % 3 == 0:
         return "Fizz"
+    if n % 5 == 0:
+        # TDD-Zyklus 3: GREEN von Team A
+        return "Buzz"
 
     return str(n)
