@@ -18,7 +18,7 @@ FizzBuzz Regeln:
 
 def fizzbuzz(n: int) -> str:
     """
-    TODO: Implementieren Sie diese Funktion mit TDD
+    Liefert die FizzBuzz-Darstellung einer positiven Ganzzahl.
 
     Args:
         n: Eine positive Ganzzahl

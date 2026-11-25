@@ -81,20 +81,14 @@ class TestFizzBuzzErweitert:
         assert fizzbuzz(number) == expected
 
 
-# TODO: Team A - Optional: TDD-Protokoll
 """
 TDD-Fortschritt dokumentieren:
 
-Test 1: [Was getestet] - Autor: [Name] - Zeit: [Zeit]
-Implementation 1: [Minimale Lösung] - Zeit: [Zeit]
+Zyklus 1: Zahl als String - RED/GREEN von TNSS
+Zyklus 2: Teilbarkeit durch 3 - RED von NOVE, GREEN von TNSS
+Zyklus 3: Teilbarkeit durch 5 - RED von NOVE, GREEN von TNSS
+Zyklus 4: Teilbarkeit durch 3 und 5 - RED von NOVE, REFACTOR von NOVE
+Zyklus 5: Normale Zahl und Zusatzfaelle - RED/GREEN/REFACTOR von NOVE & TNSS
 
-Test 2: [Was getestet] - Autor: [Name] - Zeit: [Zeit]  
-Refactoring: [Was geändert] - Zeit: [Zeit]
-
-[Weiter dokumentieren...]
-
-Erkenntnisse:
-- Was war überraschend?
-- Wo musstet ihr refaktorieren?
-- Welche Tests brachten neue Herausforderungen?
+Erkentnis: Die Prüfung für 3 UND 5 muss vor den Einzelprüfungen stehen.
 """
