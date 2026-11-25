@@ -57,23 +57,28 @@ class TestFizzBuzzTDD:
     def test_fifteen_returns_fizzbuzz(self):
         assert fizzbuzz(15) == "FizzBuzz"
 
+    # TDD-Zyklus 5: RED/GREEN von NOVE
+    def test_two_returns_its_string_representation(self):
+        assert fizzbuzz(2) == "2"
+
 
 class TestFizzBuzzErweitert:
     """
     TODO: Team A - Erweiterte Tests, wenn Basis funktioniert
     """
 
-    def test_placeholder_extended_tests(self):
-        """
-        TODO: Team A - Entwickelt weitere Tests für FizzBuzz
-
-        Ideen:
-        - Mehrere Zahlen gleichzeitig testen
-        - Parametrisierte Tests (@pytest.mark.parametrize)
-        - Edge Cases (negative Zahlen, 0, große Zahlen)
-        """
-        # TODO: Erweiterte Tests hier
-        assert True, "TODO: Erweiterte FizzBuzz-Tests implementieren"
+    # TDD-Zyklus 5: REFACTOR von NOVE & TNSS
+    @pytest.mark.parametrize(
+        ("number", "expected"),
+        [
+            (6, "Fizz"),
+            (10, "Buzz"),
+            (30, "FizzBuzz"),
+            (7, "7"),
+        ],
+    )
+    def test_additional_fizzbuzz_cases(self, number, expected):
+        assert fizzbuzz(number) == expected
 
 
 # TODO: Team A - Optional: TDD-Protokoll
