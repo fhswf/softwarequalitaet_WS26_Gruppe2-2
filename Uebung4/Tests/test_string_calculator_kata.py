@@ -1,3 +1,5 @@
+#implementiert von: JYBS, RTRE
+
 """
 TDD-Template für String Calculator Kata
 =======================================
@@ -20,7 +22,7 @@ Autorschaft dokumentieren: Wer hat welchen TDD-Schritt gemacht?
 import pytest
 
 # TODO: Team B - Import nach erster Implementierung:
-# from ..Code.string_calculator_kata import add
+from ..Code.string_calculator_kata import add
 
 
 class TestStringCalculatorTDD:
@@ -34,21 +36,41 @@ class TestStringCalculatorTDD:
     - Ein Test nach dem anderen!
     """
 
-    def test_placeholder_start_here(self):
-        """
-        TODO: Team B - Ersetzt diesen Placeholder durch euren ersten TDD-Test!
+    #TDD-Zyklus 1: RED von JYBS
+    #TDD-Zyklus 1: GREEN von RTRE
+    def test_empty_string_returns_zero(self):
+        assert add("") == 0
 
-        Ideen für den ersten Test:
-        - Was ist das einfachste Verhalten?
-        - add("") sollte was zurückgeben?
+    #TDD-Zyklus 2: RED von RTRE
+    #TDD-Zyklus 2: GREEN von JYBS
+    def test_string_with_number_returns_number(self):
+        assert add("1") == 1
 
-        TDD-Autor: [Name und Zeit]
-        """
-        # TODO: Euer erster TDD-Test hier
-        assert True, "Placeholder - startet hier mit TDD!"
+    #TDD-Zyklus 3: RED von JYBS
+    #TDD-Zyklus 3: GREEN von RTRE
+    def test_two_numbers_with_comma_are_added(self):
+        assert add("1,2") == 3
+        assert add("5,10") == 15
+    
+    #TDD-Zyklus 4: RED von RTRE
+    #TDD-Zyklus 4: GREEN von JYBS
+    def test_numbers_are_added(self):
+        assert add("1,2,3,4,5") == 15
+        assert add ("3,7,10") == 20
 
-        # Beispiel-Idee (entfernt nach eigenem Test):
-        # assert add("") == 0
+    #TDD-Zyklus 5: RED von JYBS
+    #TDD-Zyklus 5: GREEN von RTRE
+    def test_new_line_allowed(self):
+        assert add("1\n2") == 3
+        assert add("10\n5") == 15
+
+    #TDD-Zyklus 6: RED von RTRE
+    #TDD-Zyklus 6: GREEN von JYBS
+    def test_custom_delimiter(self):
+        assert add("//;\n1;2") == 3
+        assert add(";\n//4;,5/;\n") ==9
+
+
 
 
 class TestStringCalculatorErweitert:
