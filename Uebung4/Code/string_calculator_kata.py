@@ -13,16 +13,23 @@ def add(numbers: str) -> int:
     numbers = numbers.replace("/",",")
     numbers = numbers.replace(";",",")
 
+    for char in numbers:
+        if not (char.isdigit() or (char == "-") or (char == ",")):
+                return "Ungültige Eingabe."
+
     if "," in numbers:
         nums = numbers.split(",")
         result = 0
+        index = 0
         for num in nums:
             if num == "":
                 num = 0
+            if num == "-":
+                num = 0
+                nums[index+1] = nums[index+1]*(-1)
             result += int(num)
+            index += 1
         return result
 
-   
-    
     return int(numbers)
 

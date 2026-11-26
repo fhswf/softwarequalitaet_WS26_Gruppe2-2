@@ -77,8 +77,23 @@ class TestStringCalculatorErweitert:
     """
     TODO: Team B - Erweiterte Tests, wenn Basis funktioniert
     """
+    #TDD-Zyklus 7: RED von JYBS
+    #TDD-Zyklus 7: GREEN von RTRE
+    def test_negative_numbers_are_returned(self):
+        assert add("-5") == -5
+        assert add("/;-6,//") == -6
 
-    def test_placeholder_extended_tests(self):
+    #TDD-Zyklus 8: RED & GREEN von RTRE (keine Codeanpassung nötig)
+    def test_big_numbers_are_returned(self):
+        assert add("1234567890") == 1234567890
+
+    #TDD-Zyklus 9: RED von JYBS
+    #TDD-Zyklus 9: GREEN von RTRE
+    def test_invalid_entries(self):
+        assert add("?") == "Ungültige Eingabe."
+        assert add("Buchstaben")
+        assert add("+")
+        
         """
         TODO: Team B - Entwickelt weitere Tests für String Calculator
 
@@ -88,21 +103,63 @@ class TestStringCalculatorErweitert:
         - Parametrisierte Tests (@pytest.mark.parametrize)
         - Fehlerbehandlung (ungültige Eingaben)
         """
-        # TODO: Erweiterte Tests hier
-        assert True, "TODO: Erweiterte String Calculator-Tests implementieren"
-
 
 # TODO: Team B - Optional: TDD-Protokoll
 """
 TDD-Fortschritt dokumentieren:
 
-Test 1: [Was getestet] - Autor: [Name] - Zeit: [Zeit]
-Implementation 1: [Minimale Lösung] - Zeit: [Zeit]
+Test 1: [leerer String gibt 0 zurück] - Autor: [JYBS]
+Implementation 1: [if numbers == "": return 0] - Autor: [RTRE]
 
-Test 2: [Was getestet] - Autor: [Name] - Zeit: [Zeit]  
-Refactoring: [Was geändert] - Zeit: [Zeit]
+Test 2: [String mit Nummer gibt diese Nummer zurück] - Autor: [RTRE] 
+Implementation 2: [return int(numbers)] - Autor: [JYBS]
 
-[Weiter dokumentieren...]
+Test 3: [Zwei durch Komma getrennte Zahlen werden addiert] - Autor: [JYBS]  
+Implementation 3: [ if "," in numbers:
+                    nums = numbers.split(",")
+                    return (int(nums[0])+int(nums[1])) ] - Autor: [RTRE]
+
+Test 4: [Mehrere durch Komma getrennte Zahlen werden addiert] - Autor: [RTRE] 
+Implementation 4: [ if "," in numbers:
+                    nums = numbers.split(",")
+                    result = 0
+                    for num in nums:
+                        result += int(num)
+                    return result ] - Autor: [JYBS]
+
+Test 5: [Neue Zeilen ("\n") als Trenner erlaubt] - Autor: [JYBS]  
+Implementation 5: [numbers = numbers.replace("\n", ",")] - Autor: [RTRE]
+
+Test 6: [Custom Delimiter: auch "/" und ";" erlaubt, auch direkt hintereinander] - Autor: [RTRE] 
+Implementation 6: [ numbers = numbers.replace("/",",")
+                    numbers = numbers.replace(";",",")
+                    ...
+                    for num in nums:
+                        if num == "":
+                            num = 0
+                        result += int(num) ] - Autor: [JYBS]
+
+Test 7: [Negative Zahlen werden zurückgegeben] - Autor: [JYBS]
+Implementation 7: [ if "," in numbers:
+                        nums = numbers.split(",")
+                        result = 0
+                        index = 0
+                        for num in nums:
+                            if num == "": num = 0
+                            if num == "-":
+                                num = 0
+                                nums[index+1] = nums[index+1]*(-1)
+                            result += int(num)
+                            index += 1
+                        return result ]
+
+Test 8: [Große Zahlen werden zurückgegeben] - Autor: [RTRE]
+Implementation 8: [keine Änderung nötig, Code funktioniert direkt korrekt]
+
+Test 9: [Ungültige Eingaben] - Autor: [JYBS]
+Implementation: [for char in numbers:
+                    if not (char.isdigit() or (char == "-") or (char == ",")):
+                        return "Ungültige Eingabe."] - Autor:  [RTRE]
 
 Erkenntnisse:
 - Was war überraschend?
