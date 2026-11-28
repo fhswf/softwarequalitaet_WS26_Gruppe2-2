@@ -2,8 +2,6 @@
 TDD-Template für Currency-API Service
 =====================================
 
-TODO: Team B - Implementiert get_exchange_rate_assessment() testgetrieben!
-
 Aufgabe:
 - Funktion ruft Currency-API auf (mocken!)
 - Extrahiert Wechselkurs aus JSON
@@ -22,46 +20,97 @@ Dokumentiert eure Autorschaft: Wer hat welchen TDD-Schritt gemacht?
 """
 
 import pytest
+"""
+TDD-Template für Currency-API Service
+=====================================
+
+Team B - Currency API mit Mocking
+
+TDD-Prozess:
+RED -> GREEN -> REFACTOR
+"""
+
 from unittest.mock import patch
 
-# TODO: Team B - Import nach erster Implementierung:
-# from ..Code.currency_service import get_exchange_rate_assessment
+from Uebung4.Code.currency_service import get_exchange_rate_assessment
 
 
 class TestCurrencyService:
     """
     Tests für Currency-API Service
-    
-    TDD-Vorgehen:
-    1. Test schreiben (RED)
-    2. Minimale Implementierung (GREEN)
-    3. Refactoring
     """
-    
-    def test_placeholder(self):
-        """
-        Placeholder - ersetzt durch echte Tests!
-        
-        Beispiel-Tests:
-        - Kurs 1.05 → "fair"
-        - Kurs 0.85 → "sehr ungünstig"
-        - Kurs 0.95 → "ungünstig"
-        - Kurs 1.15 → "günstig"
-        - Kurs 1.25 → "sehr günstig"
-        """
-        assert True, "TODO: Durch echte Tests ersetzen"
-    
-    # TODO: Team B - Beispiel für ersten echten Test:
-    # def test_fair_rate(self):
-    #     """TDD-Zyklus 1: RED von [Name] um [Zeit]"""
-    #     with patch('requests.get') as mock_get:
-    #         # Simuliere API-Response
-    #         mock_get.return_value.json.return_value = {"rate": 1.05}
-    #         
-    #         result = get_exchange_rate_assessment("EUR", "USD")
-    #         assert result == "fair"
-    #         
-    #         # Optional: Verifiziere API-Aufruf
-    #         mock_get.assert_called_once()
-    
-    # TODO: Team B - Weitere Tests für alle Bewertungskategorien hinzufügen!
+
+    # TDD-Zyklus 1: RED von RTRE
+    # TDD-Zyklus 1: GREEN von RTRE
+    # TDD-Zyklus 1: REFACTOR von RTRE
+    def test_fair_rate(self):
+        """Kurs 1.05 -> fair"""
+        with patch("requests.get") as mock_get:
+            mock_get.return_value.json.return_value = {"rate": 1.05}
+
+            result = get_exchange_rate_assessment("EUR", "USD")
+
+            assert result == "fair"
+
+    # TDD-Zyklus 2: RED von RTRE
+    # TDD-Zyklus 2: GREEN von RTRE
+    # TDD-Zyklus 2: REFACTOR von RTRE
+    def test_sehr_unguenstig(self):
+        """Kurs 0.85 -> sehr ungünstig"""
+        with patch("requests.get") as mock_get:
+            mock_get.return_value.json.return_value = {"rate": 0.85}
+
+            result = get_exchange_rate_assessment("EUR", "GBP")
+
+            assert result == "sehr ungünstig"
+
+    # TDD-Zyklus 3: RED von RTRE
+    # TDD-Zyklus 3: GREEN von RTRE
+    # TDD-Zyklus 3: REFACTOR von RTRE
+    def test_unguenstig(self):
+        """Kurs 0.95 -> ungünstig"""
+        with patch("requests.get") as mock_get:
+            mock_get.return_value.json.return_value = {"rate": 0.95}
+
+            result = get_exchange_rate_assessment("EUR", "GBP")
+
+            assert result == "ungünstig"
+
+    # TDD-Zyklus 4: RED von RTRE
+    # TDD-Zyklus 4: GREEN von RTRE
+    # TDD-Zyklus 4: REFACTOR von RTRE
+    def test_guenstig(self):
+        """Kurs 1.15 -> günstig"""
+        with patch("requests.get") as mock_get:
+            mock_get.return_value.json.return_value = {"rate": 1.15}
+
+            result = get_exchange_rate_assessment("USD", "EUR")
+
+            assert result == "günstig"
+
+    # TDD-Zyklus 5: RED von RTRE
+    # TDD-Zyklus 5: GREEN von RTRE
+    # TDD-Zyklus 5: REFACTOR von RTRE
+    def test_sehr_guenstig(self):
+        """Kurs 1.25 -> sehr günstig"""
+        with patch("requests.get") as mock_get:
+            mock_get.return_value.json.return_value = {"rate": 1.25}
+
+            result = get_exchange_rate_assessment("USD", "EUR")
+
+            assert result == "sehr günstig"
+
+    # TDD-Zyklus 6: RED von RTRE
+    # TDD-Zyklus 6: GREEN von RTRE
+    # TDD-Zyklus 6: REFACTOR von RTRE
+    def test_api_url_wird_korrekt_aufgerufen(self):
+        """Prüft den korrekten API-Aufruf"""
+        with patch("requests.get") as mock_get:
+            mock_get.return_value.json.return_value = {"rate": 1.05}
+
+            get_exchange_rate_assessment("EUR", "USD")
+
+            mock_get.assert_called_once_with(
+                "https://api.exchangerate.com/convert?from=EUR&to=USD",
+                timeout=5,
+            )
